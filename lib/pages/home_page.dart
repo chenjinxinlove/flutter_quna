@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_quna/dao/home_dao.dart';
+import 'package:flutter_quna/model/common_model.dart';
 import 'package:flutter_quna/model/home_model.dart';
+import 'package:flutter_quna/widget/local_nav.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_quna/widget/grid_nav.dart';
+
 const APPBAR_SCROLL_OFFSET = 100;
 
 
@@ -21,7 +25,8 @@ class _HomePageState extends State<HomePage> {
     'https://imgsa.baidu.com/news/q%3D100/sign=e7057f8606fa513d57aa68de0d6c554c/c75c10385343fbf2c49b4c79be7eca8065388f31.jpg'
   ];
   double appBarAlpha = 0;
-  String resultString;
+  List<CommonModel> localNavList = [];
+
   _onScroll(offset) {
     double alpha = offset / APPBAR_SCROLL_OFFSET;
     if(alpha < 0) {
@@ -44,12 +49,10 @@ class _HomePageState extends State<HomePage> {
     try {
       HomeModel model = await HomeDao.fetch();
       setState(() {
-        resultString = json.encode(model);
+        localNavList = model.localNavList;
       });
     } catch (e) {
-      setState(() {
-        resultString = e.toString();
-      });
+      print(e);
     }
   }
 
@@ -84,9 +87,13 @@ class _HomePageState extends State<HomePage> {
                       pagination: SwiperPagination(),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
+                    child: LocalNav(localNavList: localNavList),
+                  ),
                   Container(
                     height: 800,
-                    child: ListTile(title: Text(resultString),),
+                    child: ListTile(title: Text('ddd'),),
                   )
                 ],
               ),
