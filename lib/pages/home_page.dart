@@ -5,8 +5,11 @@ import 'package:flutter_quna/dao/home_dao.dart';
 import 'package:flutter_quna/model/common_model.dart';
 import 'package:flutter_quna/model/grid_nav_model.dart';
 import 'package:flutter_quna/model/home_model.dart';
+import 'package:flutter_quna/model/sales_box_model.dart';
 import 'package:flutter_quna/widget/grid_nav.dart';
 import 'package:flutter_quna/widget/local_nav.dart';
+import 'package:flutter_quna/widget/sales_box.dart';
+import 'package:flutter_quna/widget/sub_nav.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -27,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   ];
   double appBarAlpha = 0;
   List<CommonModel> localNavList = [];
+  List<CommonModel> subNavList = [];
   GridNavModel gridNavModel;
+  SalesBoxModel salesBoxModel;
 
   _onScroll(offset) {
     double alpha = offset / APPBAR_SCROLL_OFFSET;
@@ -53,6 +58,8 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         localNavList = model.localNavList;
         gridNavModel = model.gridNav;
+        subNavList = model.subNavList;
+        salesBoxModel = model.salesBox;
       });
     } catch (e) {
       print(e);
@@ -98,9 +105,13 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.fromLTRB(7, 0, 7, 4),
                     child: GridNav(gridNavModel: gridNavModel),
                   ),
-                  Container(
-                    height: 800,
-                    child: ListTile(title: Text('ddd'),),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(7, 0, 7, 4),
+                    child: SubNav(subNavList: subNavList),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(7, 0, 7, 4),
+                    child: SalesBox(salesBox: salesBoxModel),
                   )
                 ],
               ),

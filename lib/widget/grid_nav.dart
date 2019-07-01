@@ -28,10 +28,10 @@ class GridNav extends StatelessWidget{
       items.add(_gridNavItem(context, gridNavModel.hotel, true));
     }
     if(gridNavModel.flight!=null) {
-      items.add(_gridNavItem(context, gridNavModel.flight, true));
+      items.add(_gridNavItem(context, gridNavModel.flight, false));
     }
     if(gridNavModel.travel!=null) {
-      items.add(_gridNavItem(context, gridNavModel.travel, true));
+      items.add(_gridNavItem(context, gridNavModel.travel, false));
     }
     return items;
   }
@@ -49,7 +49,7 @@ class GridNav extends StatelessWidget{
 
     return Container(
       height: 88,
-      margin: first?null:EdgeInsets.only(top:3),
+      margin: first?null: EdgeInsets.only(top: 3),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors:
           [startColor, endColor]
